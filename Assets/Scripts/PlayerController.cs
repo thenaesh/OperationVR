@@ -10,6 +10,7 @@ public class PlayerController : NetworkBehaviour
 	public float distance = 10f;
 
 	private Transform cameraTransform;
+	private NetworkStartPosition[] spawnPoints;
 
 	void Update()
 	{
@@ -62,9 +63,18 @@ public class PlayerController : NetworkBehaviour
 		GameObject.FindGameObjectWithTag ("GvrMain").transform.parent = transform;
 		cameraTransform.position = transform.position + new Vector3(0f, 0.6f, 0.3f);
 		cameraTransform.rotation= transform.rotation;
-		//cameraTransform.localPosition = transform.position + new Vector3(0f, 1f, 0f);
-		//cameraTransform.localRotation= transform.rotation;
-		GameObject.FindGameObjectWithTag("Head").GetComponent<CardboardHead>().setTarget (transform);
+
+		//makes player a child of his spawnpoint so CardboardHead localOrientation will work and player starts facing origin
+		spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+		for (short i = 0; i < spawnPoints.Length; i++)
+		{
+			if (Vector3.Distance(transform.position, spawnPoints [i].transform.position)<0.5) {
+				transform.parent = spawnPoints[i].transform;
+				break;
+			}
+		}
+
+		GameObject.FindGameObjectWithTag("Head").GetComponent<CardboardHead>().SetTarget (transform);
 	}
 
 }
