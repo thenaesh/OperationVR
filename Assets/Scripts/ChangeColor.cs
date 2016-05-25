@@ -8,7 +8,7 @@ public class ChangeColor : MonoBehaviour, ICardboardGazeResponder {
 	}
 
 	private void Recolor() {
-		GetComponent<Renderer> ().material.color = Color.yellow;//Color(Random.Range(0.0,1.0),Random.Range(0.0,1.0),Random.Range(0.0,1.0));
+		GetComponent<Renderer> ().material.color = new Color(Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f),1.0f);
 
 	}
 
