@@ -65,6 +65,11 @@ public class CardboardHead : MonoBehaviour {
   /// during `Update()` by setting this to true.
   public bool updateEarly = false;
 
+  // sb: offset for spawn position
+  private Transform offset;
+  private bool runOnce;
+
+
   /// Returns a ray based on the heads position and forward direction, after making
   /// sure the transform is up to date.  Use to raycast into the scene to determine
   /// objects that the user is looking at.
@@ -108,13 +113,31 @@ public class CardboardHead : MonoBehaviour {
 
     if (trackRotation) {
       var rot = Cardboard.SDK.HeadPose.Orientation;
+
+			Debug.Log ("rot: " + rot.eulerAngles);
+
       if (target == null) {
         transform.localRotation = rot;
+		Debug.Log ("sb: Player object not dynamically attached to GvrHead Script");
       } else {
-        transform.rotation = target.rotation * rot;
+		//Debug.Log ("Rot: " + rot.eulerAngles);
+				/*
+				if (runOnce) {
+					target.localRotation = Quaternion.Euler(new Vector3( 0, rot.eulerAngles.y, 0) + offset.localRotation.eulerAngles);
+					runOnce = false;
+				} else {
+					target.localRotation = Quaternion.Euler(new Vector3( 0, rot.eulerAngles.y, 0));
+				}
+				*/
+		
+		target.localRotation = Quaternion.Euler(new Vector3( 0, rot.eulerAngles.y, 0));
+		transform.localRotation = Quaternion.Euler(new Vector3( rot.eulerAngles.x, 0, rot.eulerAngles.z));
+
+
       }
     }
-
+	
+	/*
     if (trackPosition) {
       Vector3 pos = Cardboard.SDK.HeadPose.Position;
       if (target == null) {
@@ -123,9 +146,16 @@ public class CardboardHead : MonoBehaviour {
         transform.position = target.position + target.rotation * pos;
       }
     }
+    */
 
     if (OnHeadUpdated != null) {
       OnHeadUpdated(gameObject);
     }
+  }
+
+  public void setTarget(Transform t) {
+    target = t;
+	offset = t;
+	runOnce = true;
   }
 }
