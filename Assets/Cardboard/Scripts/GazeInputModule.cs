@@ -316,5 +316,7 @@ public class GazeInputModule : BaseInputModule {
 
     cardboardPointer.OnGazeDisabled();
   }
+
+
 }
 
