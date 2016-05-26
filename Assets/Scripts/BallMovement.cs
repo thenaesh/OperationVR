@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallMovement2 : MonoBehaviour, ICardboardGazeResponder {
+public class BallMovement : MonoBehaviour, ICardboardGazeResponder {
 
 	public float speed = 5.0f;
 
@@ -13,9 +13,15 @@ public class BallMovement2 : MonoBehaviour, ICardboardGazeResponder {
 	}
 
 
+	public void Reset() {
+		transform.position = new Vector3 (0, 2, 0);
+		rb.velocity = new Vector3 (0, 0, 0);
+	}
+
+
 	IEnumerator GazeDelay() {
 		yield return new WaitForSeconds (delay);
-		//GetComponent<Renderer> ().material.color = Color.black;
+		GetComponent<Renderer> ().material.color = Color.yellow;
 		//SB: MAKE THIS BETTER for 2nd or 3rd sharing
 		rb.velocity = new Vector3 ( Mathf.Sign((float)Random.Range(-1,1)) * speed, 0.0f, 0.0f);
 	}
