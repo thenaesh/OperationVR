@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GvrMain
   - Head
+  - Island
   layers:
   - Default
   - TransparentFX
