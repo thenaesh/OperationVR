@@ -76,5 +76,4 @@ public class PlayerController : NetworkBehaviour
 
 		GameObject.FindGameObjectWithTag("Head").GetComponent<CardboardHead>().SetTarget (transform);
 	}
-
 }

@@ -32,6 +32,7 @@ public class CollideScore : MonoBehaviour {
         if (other.CompareTag("MainBall"))
         {
             // don't forget activate is a Trigger
+			GetComponent<AudioSource>().Play();
             score += 1;
             setScore();
 			other.GetComponent<BallMovement>().Reset();
