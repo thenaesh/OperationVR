@@ -65,6 +65,7 @@ public class CardboardHead : MonoBehaviour {
   /// during `Update()` by setting this to true.
   public bool updateEarly = false;
 
+
   /// Returns a ray based on the heads position and forward direction, after making
   /// sure the transform is up to date.  Use to raycast into the scene to determine
   /// objects that the user is looking at.
@@ -108,13 +109,18 @@ public class CardboardHead : MonoBehaviour {
 
     if (trackRotation) {
       var rot = Cardboard.SDK.HeadPose.Orientation;
-      if (target == null) {
-        transform.localRotation = rot;
-      } else {
-        transform.rotation = target.rotation * rot;
+
+	    if (target == null) {
+  			transform.localRotation = rot;
+  			Debug.Log ("sb: Player object not dynamically attached to GvrHead Script");
+			} else {
+    		target.localRotation = Quaternion.Euler (new Vector3 (0, rot.eulerAngles.y, 0));
+    		transform.localRotation = Quaternion.Euler(new Vector3( rot.eulerAngles.x, 0, rot.eulerAngles.z));
       }
     }
-
+	
+	//Mike: turned off so as not to complicate the rotation tracking. We'll implement this before the 2nd sharing
+	/*
     if (trackPosition) {
       Vector3 pos = Cardboard.SDK.HeadPose.Position;
       if (target == null) {
@@ -123,9 +129,15 @@ public class CardboardHead : MonoBehaviour {
         transform.position = target.position + target.rotation * pos;
       }
     }
+    */
 
     if (OnHeadUpdated != null) {
       OnHeadUpdated(gameObject);
     }
   }
+
+  public void SetTarget(Transform t) {
+    target = t;
+  }
+		
 }
