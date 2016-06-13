@@ -30,9 +30,10 @@ GameObject:
   - 65: {fileID: 6564698}
   - 23: {fileID: 2308650}
   - 114: {fileID: 11432206}
-  - 114: {fileID: 11429052}
   - 114: {fileID: 11453072}
   - 82: {fileID: 8202358}
+  - 114: {fileID: 11415744}
+  - 114: {fileID: 11456212}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -396,6 +397,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11415744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f43844be2d43f41bf97a36acee6ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11419426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,17 +427,6 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
---- !u!114 &11429052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaed6e71e28b8ad40b676dfcb6d2a12b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11432206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,12 +439,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 4
+  - eventID: 0
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11429052}
-          m_MethodName: EnvironmentToggle
+        - m_Target: {fileID: 11415744}
+          m_MethodName: OnGazeEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11456212}
+          m_MethodName: OnGazeEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11415744}
+          m_MethodName: OnGazeExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11456212}
+          m_MethodName: OnGazeExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -471,6 +511,10 @@ MonoBehaviour:
   bulletSpawn: {fileID: 409902}
   dampTime: 0.3
   distance: 10
+  ballPrefab: {fileID: 164156, guid: d3c09c2d31244ca4ea4990f6d825a53f, type: 2}
+  ballSpawnPosition: {x: 0, y: 2, z: 0}
+  speed: 5
+  delay: 1
 --- !u!114 &11453072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -541,6 +585,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11456212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f491cdb0e9fa56b4286009fefc6aa97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 11433570}
 --- !u!114 &11468740
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,6 +12,19 @@ public class PlayerController : NetworkBehaviour
 	private Transform cameraTransform;
 	private NetworkStartPosition[] spawnPoints;
 
+	public GameObject ballPrefab;
+	public Vector3 ballSpawnPosition = new Vector3(0,2,0);
+	public float speed = 5.0f;
+
+
+	private GameObject ball;
+	public float delay = 1;
+
+	IEnumerator GazeDelay() {
+		yield return new WaitForSeconds (delay);
+		CmdSpawnBall();
+	}
+
 	void Update()
 	{
 		if (!isLocalPlayer)
@@ -38,6 +51,34 @@ public class PlayerController : NetworkBehaviour
 	// This [Command] code is called on the Client …
 	// … but it is run on the Server!
 	[Command]
+	public void CmdSpawnBall()
+	{
+		// Create the ball from the ballPrefab
+		ball = (GameObject)Instantiate(
+			ballPrefab,
+			ballSpawnPosition,
+			Quaternion.identity);
+
+		// Add velocity to the ball
+		ball.GetComponent<Renderer> ().material.color = Color.yellow;
+		//SB: MAKE THIS BETTER for 2nd or 3rd sharing
+		ball.GetComponent<Rigidbody>().velocity = new Vector3 ( Mathf.Sign((float)Random.Range(-1,1)) * speed, 0.0f, 0.0f);
+
+		// Spawn the ball on the Clients
+		NetworkServer.Spawn(ball);
+	}
+
+	[Command]
+	public void CmdDestroyBall()
+	{
+		// Destroy the ball on the Clients
+		NetworkServer.Destroy(ball);
+	}
+
+
+	// This [Command] code is called on the Client …
+	// … but it is run on the Server!
+	[Command]
 	void CmdFire()
 	{
 		// Create the Bullet from the Bullet Prefab
@@ -47,7 +88,7 @@ public class PlayerController : NetworkBehaviour
 			bulletSpawn.rotation);
 
 		// Add velocity to the bullet
-		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 0.1f;
 
 		// Spawn the bullet on the Clients
 		NetworkServer.Spawn(bullet);
@@ -75,5 +116,17 @@ public class PlayerController : NetworkBehaviour
 		}
 
 		GameObject.FindGameObjectWithTag("Head").GetComponent<CardboardHead>().SetTarget (transform);
+	}
+
+	public void StartSpawnCountdown() {
+		StartCoroutine ("GazeDelay");
+	}
+
+	public void StopSpawnCountdown() {
+		StopCoroutine ("GazeDelay");
+	}
+
+	public void KillBall() {
+		CmdDestroyBall ();
 	}
 }

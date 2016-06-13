@@ -6,6 +6,7 @@ public class CollideScore : MonoBehaviour {
 
     private int score = 0;
     public Text scoreText;
+	public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +36,7 @@ public class CollideScore : MonoBehaviour {
 			GetComponent<AudioSource>().Play();
             score += 1;
             setScore();
-			other.GetComponent<BallMovement>().Reset();
+			Destroy(other.gameObject);
         }
     }
 }
