@@ -60,8 +60,9 @@ public class LeapMotionInput : MonoBehaviour
 		float xRot = extractFourByteRange(data, 12);
 		float yRot = extractFourByteRange(data, 16);
 		float zRot = extractFourByteRange(data, 20);
-
-		// TODO: modify the Transform component using the data obtained
+        
+        transform.Translate(new Vector3(xPos, yPos, zPos));
+        transform.Rotate(new Vector3(xRot, yRot, zRot));
 	}
 
 	static float extractFourByteRange(byte[] data, int start)
@@ -73,11 +74,6 @@ public class LeapMotionInput : MonoBehaviour
 			range[i - start] = data[i];
 
 		return BitConverter.ToSingle(range, 0);
-	}
-
-	static void Main(string[] args)
-	{
-		// TODO: add test cases here
 	}
 }
 
