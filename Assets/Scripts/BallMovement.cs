@@ -14,13 +14,9 @@ public class BallMovement : MonoBehaviour, ICardboardGazeResponder {
 
 
 	public void Reset() {
-		/*
 		transform.position = new Vector3 (0, 2, 0);
 		rb.velocity = new Vector3 (0, 0, 0);
 		GetComponent<Renderer> ().material.color = Color.white;
-		*/
-
-		Debug.Log ("changed to networkserver.destroy()");
 	}
 
 
