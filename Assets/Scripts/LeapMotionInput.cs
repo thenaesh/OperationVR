@@ -37,10 +37,7 @@ public class LeapMotionInput : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-		}
-		finally
-		{
-			recv.Close();
+            recv.Close();
 		}
 	}
 
