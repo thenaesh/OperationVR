@@ -4,11 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - plusGameOwner
+  - plusObject
+  - plusMyPlayer
+  - plusEnemy
+  - plusFriend
   - GvrMain
   - Head
   - Island
   - DisplayBoard
   - MainBall
+  - Disable
   layers:
   - Default
   - TransparentFX
