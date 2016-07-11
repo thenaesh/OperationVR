@@ -9,6 +9,12 @@ TagManager:
   - Island
   - DisplayBoard
   - MainBall
+  - Fire
+  - ballSpawn
+  - reticle
+  - myScore
+  - otherScore
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -18,7 +24,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - hidden
   - 
   - 
   - 
