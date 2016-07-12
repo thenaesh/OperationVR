@@ -15,6 +15,7 @@ TagManager:
   - myScore
   - otherScore
   - Ball
+  - leap
   layers:
   - Default
   - TransparentFX

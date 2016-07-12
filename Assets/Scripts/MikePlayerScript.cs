@@ -11,6 +11,8 @@ public class MikePlayerScript: NetworkBehaviour {
 	private Text myScore;
 	private Text otherScore;
 
+    private Transform leapTransform;
+
 
 	void Start () {
 		if (isLocalPlayer) {
@@ -25,7 +27,13 @@ public class MikePlayerScript: NetworkBehaviour {
 
 			// Point the object at thw world origin
 			transform.LookAt(Vector3.zero);
-		}
+
+            //Transform local scene object:leap space as a local player child 
+            leapTransform = GameObject.FindGameObjectWithTag("leap").GetComponent<Transform>();
+            leapTransform.parent = transform;
+            leapTransform.position = transform.position; //+ new Vector3(0f, 0.6f, 0.3f);
+            leapTransform.rotation = transform.rotation;
+        }
 	}
 
 	void FixedUpdate() {
