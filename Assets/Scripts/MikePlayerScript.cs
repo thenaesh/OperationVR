@@ -32,7 +32,7 @@ public class MikePlayerScript: NetworkBehaviour {
             leapTransform = GameObject.FindGameObjectWithTag("leap").GetComponent<Transform>();
             leapTransform.parent = transform;
             leapTransform.position = transform.position; //+ new Vector3(0f, 0.6f, 0.3f);
-            leapTransform.rotation = transform.rotation;
+             leapTransform.rotation = transform.rotation;
         }
 	}
 
