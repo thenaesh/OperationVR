@@ -5,13 +5,16 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class MikePlayerScript: NetworkBehaviour {
-	[SyncVar]
+    private bool isHost = false;
+
+    [SyncVar]
 	public int score = 0;
 
 	private Text myScore;
 	private Text otherScore;
 
     private Transform leapTransform;
+    
 
 
 	void Start () {
@@ -31,32 +34,44 @@ public class MikePlayerScript: NetworkBehaviour {
             //Transform local scene object:leap space as a local player child 
             leapTransform = GameObject.FindGameObjectWithTag("leap").GetComponent<Transform>();
             leapTransform.parent = transform;
-            leapTransform.position = transform.position; //+ new Vector3(0f, 0.6f, 0.3f);
-             leapTransform.rotation = transform.rotation;
+            leapTransform.position = transform.position + transform.forward;
+            leapTransform.rotation = transform.rotation;
         }
 	}
 
 	void FixedUpdate() {
 
-		// PERFORM RAYCAST
-		RaycastHit hit;
-		Transform cameraTransform = Camera.main.transform;
+        // FINDS THE HOST
+        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        {
+            isHost = true;
+        }
 
-		//if(Physics.Raycast(transform.position, transform.forward, out hit, 50f))
-		if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 50f))
-		{
-			if (hit.transform.tag == "Ball") {
+        if (isHost)
+        {
+            // PERFORM RAYCAST
+            RaycastHit hit;
+            Transform cameraTransform = Camera.main.transform;
 
-				Transform ballTransform = hit.collider.gameObject.transform;
-//				hit.rigidbody.AddExplosionForce (3f, transform.position, 10f);
-				hit.rigidbody.AddForce (-transform.position);
+            //if(Physics.Raycast(transform.position, transform.forward, out hit, 50f))
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 50f))
+            {
+                if (hit.transform.tag == "Ball")
+                {
 
-				GameObject.FindGameObjectWithTag ("reticle").GetComponent<Image>().color = Color.red;
-			} else {
-				GameObject.FindGameObjectWithTag ("reticle").GetComponent<Image> ().color = Color.white;
-			}
-		}
+                    Transform ballTransform = hit.collider.gameObject.transform;
+                    //				hit.rigidbody.AddExplosionForce (3f, transform.position, 10f);
+                    hit.rigidbody.AddForce(-transform.position);
 
+                    GameObject.FindGameObjectWithTag("reticle").GetComponent<Image>().color = Color.red;
+                }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("reticle").GetComponent<Image>().color = Color.white;
+                }
+            }
+
+        }
 
 		// UPDATE SCOREBOARD
 		try { // BAND-AID. might loop through some other stuff, idk what. 
