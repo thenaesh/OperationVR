@@ -3,11 +3,19 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class CollideScore : MonoBehaviour {
-	Vector3 ballSpawnPos;
+	private Vector3 ballSpawnPos;
+	public int score = 0;
+	public Text scoreText;
 
 	void Start()
 	{
 		ballSpawnPos = GameObject.FindGameObjectWithTag("ballSpawn").transform.position;
+		setScore();
+	}
+
+	public void setScore()
+	{
+		scoreText.text = scoreText.text.Substring(0,5) + score;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -21,19 +29,13 @@ public class CollideScore : MonoBehaviour {
 			other.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 
 			//UPDATE SCORE ON CORRECT PLAYER GAMEOBJECT
-			GameObject[] gos;
-			gos = GameObject.FindGameObjectsWithTag("Player");
-			int furthest = 0;
-			float furthestDistance = 0f;
-			for(int i=0; i<gos.Length; i++) {
-				float distance = (transform.position - gos[i].transform.position).magnitude;
-				if (distance > furthestDistance) {
-					furthest = i;
-					furthestDistance = distance;
-				}
-			}
-			gos[furthest].GetComponent<MikePlayerScript>().IncreaseScore(1);
+			// don't forget activate is a Trigger
+			GetComponent<AudioSource>().Play();
+			score += 1;
+			setScore();
 
 		}
 	}
+
+
 }

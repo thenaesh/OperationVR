@@ -16,6 +16,8 @@ TagManager:
   - otherScore
   - Ball
   - leap
+  - goal1
+  - goal2
   layers:
   - Default
   - TransparentFX
