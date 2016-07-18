@@ -34,7 +34,7 @@ public class MikePlayerScript: NetworkBehaviour {
             //Transform local scene object:leap space as a local player child 
             leapTransform = GameObject.FindGameObjectWithTag("leap").GetComponent<Transform>();
             leapTransform.parent = transform;
-            leapTransform.position = transform.position + transform.forward;
+            leapTransform.position = transform.position + new Vector3(0,1.0f,0) + transform.forward;
             leapTransform.rotation = transform.rotation;
         }
 	}
