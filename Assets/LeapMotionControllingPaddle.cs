@@ -2,10 +2,14 @@
 using Leap.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
+using UnityEngine;
 
 using UnityEngine;
+
 //using Vuforia;
-public class LeapMotionControllingPaddle : MonoBehaviour
+
+public class LeapMotionControllingPaddle : NetworkBehaviour
 {
     private LeapServiceProvider leapProvider;
 
@@ -13,43 +17,49 @@ public class LeapMotionControllingPaddle : MonoBehaviour
     private float vectory;
     private float vectorz;
 
+    private bool Local;
+
 
     // Use this for initialization
     private void Start()
     {
+        Local = transform.parent.gameObject.GetComponent<MikePlayerScript>().isLocalPlayer;
         leapProvider = FindObjectOfType<LeapServiceProvider>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Frame currentFrame = leapProvider.CurrentFrame;
-        try
+        if (Local)
         {
-            foreach (Hand hand in currentFrame.Hands)
+            Frame currentFrame = leapProvider.CurrentFrame;
+            try
             {
-                if (hand.IsLeft)
+                foreach (Hand hand in currentFrame.Hands)
                 {
-                    //Individual Allocation of vector components works
-                    vectorx = hand.PalmPosition.x;
-                    vectory = hand.PalmPosition.y;
-                    vectorz = hand.PalmPosition.z;
-                    transform.position = new Vector3(vectorx, vectory, vectorz);
-                    // transform.position = hand.PalmPosition;
-                    //  Debug.Log("Left hand is @ " + hand.PalmPosition);
-                }
-                else
-                {
-                    vectorx = hand.PalmPosition.x;
-                    vectory = hand.PalmPosition.y;
-                    vectorz = hand.PalmPosition.z;
-                    transform.position = new Vector3(vectorx, vectory, vectorz);
-                    //  transform.position = hand.PalmPosition;
-                    //  Debug.Log("Right hand is @ " + hand.PalmPosition);
+                    if (hand.IsLeft)
+                    {
+                        //Individual Allocation of vector components works
+                        vectorx = hand.PalmPosition.x;
+                        vectory = hand.PalmPosition.y;
+                        vectorz = hand.PalmPosition.z;
+                        transform.position = new Vector3(vectorx, vectory, vectorz);
+                        // transform.position = hand.PalmPosition;
+                        //  Debug.Log("Left hand is @ " + hand.PalmPosition);
+                    }
+                    else
+                    {
+                        vectorx = hand.PalmPosition.x;
+                        vectory = hand.PalmPosition.y;
+                        vectorz = hand.PalmPosition.z;
+                        transform.position = new Vector3(vectorx, vectory, vectorz);
+                        //  transform.position = hand.PalmPosition;
+                        //  Debug.Log("Right hand is @ " + hand.PalmPosition);
+                    }
                 }
             }
+            catch { }
+            // Debug.Log("---Next frame---");
         }
-        catch { }
-        // Debug.Log("---Next frame---");
     }
 }
