@@ -7,13 +7,25 @@ public class CollideScore : MonoBehaviour {
 	public int score = 0;
 	public Text scoreText;
 
-	void Start()
+    private GameObject EyeGazeHandParent;
+    private GameObject EyeGazeHand;
+    private GameObject ShieldHand;
+
+    void Start()
 	{
 		ballSpawnPos = GameObject.FindGameObjectWithTag("ballSpawn").transform.position;
 		setScore();
-	}
 
-	public void setScore()
+        //Find EyeGazeHandParent
+        EyeGazeHandParent = GameObject.FindGameObjectWithTag("EyeGazeParent");
+        //Find EyeGazeHand 
+        EyeGazeHand = EyeGazeHandParent.transform.GetChild(0).gameObject;
+        //Find ShieldHand
+        ShieldHand = EyeGazeHandParent.transform.GetChild(1).gameObject;
+
+    }
+
+    public void setScore()
 	{
 		scoreText.text = scoreText.text.Substring(0,5) + score;
 	}
@@ -23,10 +35,11 @@ public class CollideScore : MonoBehaviour {
 
 		if (other.CompareTag("Ball"))
 		{
-			//RESET BALL POSITION AND STOP MOVEMENT
+			//RESET BALL POSITION AND STOP MOVEMENT,Stop ball rotation 
 			//other.transform.position = new Vector3 (0, 0.5f, 0);
 			other.transform.position = ballSpawnPos;
 			other.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+            other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
 			//UPDATE SCORE ON CORRECT PLAYER GAMEOBJECT
 			// don't forget activate is a Trigger
@@ -34,7 +47,13 @@ public class CollideScore : MonoBehaviour {
 			score += 1;
 			setScore();
 
-		}
+          
+            //Disable EyeGazeHand plane and ShieldHand after ball scores
+            EyeGazeHand.SetActive(false);
+            ShieldHand.SetActive(false);
+
+
+        }
 	}
 
 

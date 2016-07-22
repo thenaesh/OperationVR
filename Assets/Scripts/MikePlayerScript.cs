@@ -6,14 +6,22 @@ using UnityEngine.UI;
 public class MikePlayerScript: MonoBehaviour {
 
     private Transform leapTransform;
+    private GameObject EyeGazeHandParent;
+    private GameObject EyeGazeHand;
+    private GameObject ShieldHand;
+    private Vector3 LookPoint;
     
 	void Start () {
-        //Transform local scene object:leap space as a local player child 
-        leapTransform = GameObject.FindGameObjectWithTag("leap").GetComponent<Transform>();
-        leapTransform.parent = transform;
-        leapTransform.position = transform.position + transform.forward;
-        leapTransform.rotation = transform.rotation;
-	}
+        //Find EyeGazeHandParent
+        EyeGazeHandParent = GameObject.FindGameObjectWithTag("EyeGazeParent");
+        //Find EyeGazeHand 
+        EyeGazeHand = EyeGazeHandParent.transform.GetChild(0).gameObject;
+        //Find ShieldHand
+        ShieldHand = EyeGazeHandParent.transform.GetChild(1).gameObject;
+
+
+
+    }
 
 	void FixedUpdate() {
 		
@@ -31,11 +39,19 @@ public class MikePlayerScript: MonoBehaviour {
                     //				hit.rigidbody.AddExplosionForce (3f, transform.position, 10f);
                     hit.rigidbody.AddForce(-transform.position);
 
-                    GameObject.FindGameObjectWithTag("reticle").GetComponent<Image>().color = Color.red;
-                }
-                else
+               
+                //Set active EyeGazeHAnd plane and ShieldHand after ball starts
+                EyeGazeHand.SetActive(true);
+                ShieldHand.SetActive(true);
+            }
+
+               else if (hit.transform.tag == "EyeGazeHand")
                 {
-                    GameObject.FindGameObjectWithTag("reticle").GetComponent<Image>().color = Color.white;
+                //Adjust Handshield to be slightly in front of EyeGazeHand Plane
+                ShieldHand.transform.position = hit.point - new Vector3(0.4f,0,0);   
+
+
+
                 }
             }
 	}

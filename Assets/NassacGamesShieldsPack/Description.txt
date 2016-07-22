@@ -1,0 +1,2 @@
+
+ A small collection of six free shields to use in your projects. Included are the diffuse, normal, spec and occlusion textures for all the shields if you use different shaders. All of them are under 200 polys.
