@@ -21,6 +21,8 @@ TagManager:
   - EyeGazeHand
   - EyeGazeParent
   - ShieldHand
+  - BallSlider
+  - xhand
   layers:
   - Default
   - TransparentFX
