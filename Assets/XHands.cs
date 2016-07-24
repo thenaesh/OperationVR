@@ -4,7 +4,7 @@ using System.Collections;
 public class XHands : MonoBehaviour {
 
 	public float timeDelta;
-	public float chance = 0.25f;
+	public float chance = 0.05f;
 	private GameObject ball;
 	private bool returnBall = false;
 	private bool inBlock = false;
