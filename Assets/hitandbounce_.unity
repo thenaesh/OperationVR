@@ -15678,7 +15678,45 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6421506, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6418060, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6423840, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6445484, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6427188, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6452766, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6459092, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6427076, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6400120, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6480924, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6484406, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6405700, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6477934, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6415128, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6421652, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6477078, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6462030, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6439522, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6471966, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6418468, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6488838, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6423832, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6402648, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6444746, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6482496, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6429140, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6425532, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6429486, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6474588, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6489398, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6420246, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6426238, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6495986, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6478282, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6479976, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6441486, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6482658, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
+    - {fileID: 6420212, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 09240c1c0783ef844acf745ffb31f424, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1765995977
